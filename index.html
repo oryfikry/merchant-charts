@@ -6,20 +6,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment"></script> <!-- Include Moment.js -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
-    <!-- Include the Moment.js adapter for Chart.js -->
-    <style>
-        #lineChart {
-            width: 300px;
-            height: 400px;
-        }
-    </style>
 </head>
 
 <body>
-    <div>
-        <canvas id="lineChart"></canvas>
-    </div>
-
+        <div class="chart-container" style="position: relative; height: 290px; width: 350px;">
+            <canvas id="lineChart"></canvas>
+        </div>
 </body>
 
 </html>
@@ -88,11 +80,11 @@
         data: chartData,
         options: options
     });
-
     // Function to generate a random color
     function getRandomColor() {
         return '#' + Math.floor(Math.random() * 16777215).toString(16);
     }
+
 });
 
 
