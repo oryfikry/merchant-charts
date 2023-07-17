@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pie Chart Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="chart-container" style="position: relative; height: 260px; width: 300px;">
+        <canvas id="pieChart1"></canvas>
+        <br>
+        <canvas id="pieChart2"></canvas>
+    </div>
+</body>
+<script src="script.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", async function() {
+        dataVisitors = await getSalesBreakdownVisitors()
+        dataRevenue = await getSalesBreakdownRevenue()
+        createPieChart("pieChart1", dataVisitors);
+        createPieChart("pieChart2", dataRevenue);
+
+        function createPieChart(chartId, data) {
+            var ctx = document.getElementById(chartId).getContext("2d");
+
+            // Extract labels and data values
+            var labels = data.map(item => item.category);
+            var values = data.map(item => item.percentage);
+
+            var chartData = {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"],
+                    hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"]
+                }]
+            };
+
+            var options = {
+                responsive: true,
+                maintainAspectRatio: false
+            };
+
+            new Chart(ctx, {
+                type: "pie",
+                data: chartData,
+                options: options
+            });
+        }
+    });
+</script>
+
+</html>
