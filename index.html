@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="chart-container" style="position: relative; height: 260px; width: 330px;">
+    <div class="chart-container" style="position: relative; height: 300px;width: 330px;">
         <canvas id="lineChart"></canvas>
     </div>
 </body>
@@ -39,11 +39,13 @@
         if (dataset) {
             dataset.data.push({ x: date, y: totalQty });
         } else {
+            let colorRandomed = getRandomColor()
             var newDataset = {
                 label: attraction,
                 data: [{ x: date, y: totalQty }],
-                borderColor: getRandomColor(),
-                fill: false
+                borderColor: colorRandomed,
+                backgroundColor:colorRandomed,
+                fill: true
             };
             chartData.datasets.push(newDataset);
         }
@@ -82,9 +84,7 @@
         options: options
     });
     // Function to generate a random color
-    function getRandomColor() {
-        return '#' + Math.floor(Math.random() * 16777215).toString(16);
-    }
+
 
 });
 
