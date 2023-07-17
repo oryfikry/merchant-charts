@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Line Chart Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment"></script> <!-- Include Moment.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
+    <!-- Include the Moment.js adapter for Chart.js -->
+    <style>
+        #lineChart {
+            width: 300px;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <canvas id="lineChart"></canvas>
+    </div>
+
+</body>
+
+</html>
+<script src="script.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", async function() {
+    var ctx = document.getElementById("lineChart").getContext("2d");
+    var chartData = {
+        labels: [],
+        datasets: []
+    };
+    data = await getDataVisitorShip()
+         // Process the data
+    for (var i = 0; i < data.length; i++) {
+        var attraction = data[i].attraction;
+        var date = new Date(data[i].date); // Parse the date using the Date constructor
+        var totalQty = data[i].total_redeemed_qty_by_date || 0; // Replace null or undefined with zero
+
+        var dataset = chartData.datasets.find(function(dataset) {
+            return dataset.label === attraction;
+        });
+
+        if (dataset) {
+            dataset.data.push({ x: date, y: totalQty });
+        } else {
+            var newDataset = {
+                label: attraction,
+                data: [{ x: date, y: totalQty }],
+                borderColor: getRandomColor(),
+                fill: false
+            };
+            chartData.datasets.push(newDataset);
+        }
+    }
+
+    var options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                type: 'time',
+                time: {
+                    unit: 'day',
+                    displayFormats: {
+                        day: 'MMM DD'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: "Date"
+                }
+            },
+            y: {
+                display: true,
+                title: {
+                    display: true,
+                    text: "Quantity"
+                }
+            }
+        }
+    };
+
+    var lineChart = new Chart(ctx, {
+        type: "line",
+        data: chartData,
+        options: options
+    });
+
+    // Function to generate a random color
+    function getRandomColor() {
+        return '#' + Math.floor(Math.random() * 16777215).toString(16);
+    }
+});
+
+
+</script>
