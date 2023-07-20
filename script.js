@@ -74,6 +74,6 @@ async function fetchData(url_endpoint) {
     const hue = Math.floor(Math.random() * 360); // Random hue (0 - 359)
     const saturation = Math.floor(Math.random() * 101); // Random saturation (0 - 100)
     const lightness = Math.floor(Math.random() * 101); // Random lightness (0 - 100)
-    const alpha = 0.2; // Set the desired transparency value (0.0 - fully transparent, 1.0 - fully opaque)
+    const alpha = 0.4; // Set the desired transparency value (0.0 - fully transparent, 1.0 - fully opaque)
     return `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
 }
