@@ -14,6 +14,7 @@ let params = getUrlParams();
 var startDate = params.startDate
 var endDate = params.endDate
 var tokenAuth = params.token
+var endpoint = params.endpoint
 
 async function fetchData(url_endpoint) {
     try {
@@ -39,7 +40,7 @@ async function fetchData(url_endpoint) {
   
   async function getDataVisitorShip() {
     try {
-      const jsonData = await fetchData('https://uat-api.globaltix.com/api/dashboard/getVisitorshipByDate?startDate='+startDate+'&endDate='+endDate);
+      const jsonData = await fetchData(endpoint+'/api/dashboard/getVisitorshipByDate?startDate='+startDate+'&endDate='+endDate);
       // Process the JSON data here
     //   console.log(jsonData.data);
       return jsonData.data
@@ -50,7 +51,7 @@ async function fetchData(url_endpoint) {
   
   async function getSalesBreakdownVisitors() {
     try {
-      const jsonData = await fetchData('https://uat-api.globaltix.com/api/dashboard/getChannelByVisitors?startDate='+startDate+'&endDate='+endDate);
+      const jsonData = await fetchData(endpoint+'/api/dashboard/getChannelByVisitors?startDate='+startDate+'&endDate='+endDate);
       // Process the JSON data here
     //   console.log(jsonData.data);
       return jsonData.data
@@ -61,7 +62,7 @@ async function fetchData(url_endpoint) {
   
   async function getSalesBreakdownRevenue() {
     try {
-      const jsonData = await fetchData('https://uat-api.globaltix.com/api/dashboard/getChannelByRevenue?startDate='+startDate+'&endDate='+endDate);
+      const jsonData = await fetchData(endpoint+'/api/dashboard/getChannelByRevenue?startDate='+startDate+'&endDate='+endDate);
       // Process the JSON data here
     //   console.log(jsonData.data);
       return jsonData.data
