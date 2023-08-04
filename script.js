@@ -1,3 +1,4 @@
+document.body.style.overflow = 'hidden';
 function getUrlParams() {
     var params = {};
     var search = window.location.search.substring(1);
